@@ -6,6 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="SourceAFIS" Version="3.20.0" />
+    <PackageReference Include="SourceAFIS" Version="3.14.0" />
   </ItemGroup>
 </Project>
