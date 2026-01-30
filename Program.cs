@@ -217,7 +217,8 @@ static FingerprintTemplate BuildTemplateFromImageOrRaw(
         if (bytes.Length == 0)
             throw new ArgumentException("ImageBase64 inválido o vacío");
 
-        var image = FingerprintImage.FromBytes(bytes);
+        var options = new FingerprintImageOptions { Dpi = dpi ?? 500 };
+        var image = new FingerprintImage(bytes, options);
         return new FingerprintTemplate(image);
     }
 
