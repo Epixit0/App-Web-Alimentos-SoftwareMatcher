@@ -45,7 +45,7 @@
     </Feature>
 
     <DirectoryRef Id="LOG_DIR">
-      <Component Id="LogDirComponent" Guid="*">
+      <Component Id="LogDirComponent" Guid="{D66C9C43-3A2B-4D8C-9A3C-2A1E6B0D4D6E}">
         <CreateFolder />
       </Component>
     </DirectoryRef>
