@@ -11,13 +11,13 @@ Este proyecto es un API .NET 8 (Kestrel) que expone:
 
 En una PC de build (con .NET 8 SDK):
 
-1) Publica el ejecutable:
+1. Publica el ejecutable:
 
 - Ejecuta `publish.ps1` (solo para build; el usuario final NO lo usa).
 
-2) Copia el contenido de `dist\win-x64\` a la PC del biométrico.
+2. Copia el contenido de `dist\win-x64\` a la PC del biométrico.
 
-3) En esa PC, arranca con doble click:
+3. En esa PC, arranca con doble click:
 
 - `run.cmd`
 
@@ -32,14 +32,15 @@ Si no quieres que nadie “lo abra”, puedes instalarlo como servicio.
 
 Pasos:
 
-1) Genera `dist\win-x64\` (Opción A).
-2) Copia el WinSW exe (renómbralo) y el XML:
+1. Genera `dist\win-x64\` (Opción A).
+2. Copia el WinSW exe (renómbralo) y el XML:
    - `App-Web-Alimentos-Agent\installer\assets\winsw\MarCaribeFingerprintAgent.exe` -> `dist\win-x64\MarCaribeSoftwareMatcher.exe`
    - `windows\winsw\MarCaribeSoftwareMatcher.xml` -> `dist\win-x64\MarCaribeSoftwareMatcher.xml`
-3) Ejecuta como admin:
+3. Ejecuta como admin:
    - `install-service.cmd`
 
 Desinstalar:
+
 - `uninstall-service.cmd`
 
 ## Configuración

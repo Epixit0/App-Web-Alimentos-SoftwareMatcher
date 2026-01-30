@@ -8,10 +8,10 @@ Objetivo: generar un instalador **MSI** para Windows que:
 
 ## Requisitos (solo en la PC donde compilas el MSI)
 
-1) Windows 10/11 recomendado.
-2) **.NET 8 SDK** instalado (para `dotnet publish`).
-3) **WiX Toolset v3.x** instalado.
-4) WinSW (wrapper de servicio).
+1. Windows 10/11 recomendado.
+2. **.NET 8 SDK** instalado (para `dotnet publish`).
+3. **WiX Toolset v3.x** instalado.
+4. WinSW (wrapper de servicio).
 
 ### WinSW
 

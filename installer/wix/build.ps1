@@ -76,6 +76,7 @@ Invoke-Tool $heat @(
   "-nologo",
   "-cg", "AppComponentGroup",
   "-dr", "APPDIR",
+  "-srd",
   "-gg",
   "-sreg", "-scom", "-sfrag",
   "-var", "var.PayloadDir",
