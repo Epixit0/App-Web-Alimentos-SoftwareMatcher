@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+     xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
+
+  <Product
+    Id="*"
+    Name="MarCaribe SoftwareMatcher"
+    Language="1033"
+    Codepage="65001"
+    Version="1.0.0"
+    Manufacturer="MarCaribe"
+    UpgradeCode="{f4a22d5f-0c8f-4c1a-94d3-8d8c155fc44b}">
+
+    <Package InstallerVersion="500" Compressed="yes" InstallScope="perMachine" />
+
+    <MajorUpgrade DowngradeErrorMessage="Ya hay una versión más nueva instalada." />
+    <MediaTemplate EmbedCab="yes" />
+
+    <Property Id="ARPNOREPAIR" Value="yes" Secure="yes" />
+
+    <!-- Directorios -->
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="COMPANYDIR" Name="MarCaribe">
+          <Directory Id="INSTALLFOLDER" Name="SoftwareMatcher">
+            <Directory Id="APPDIR" Name="app" />
+            <Directory Id="SERVICEDIR" Name="service" />
+          </Directory>
+        </Directory>
+      </Directory>
+
+      <!-- C:\ProgramData (para logs del servicio) -->
+      <Directory Id="CommonAppDataFolder">
+        <Directory Id="DATA_DIR" Name="MarCaribeSoftwareMatcher">
+          <Directory Id="LOG_DIR" Name="logs" />
+        </Directory>
+      </Directory>
+    </Directory>
+
+    <!-- Archivos: se generan con Heat (ver build.ps1) -->
+    <Feature Id="MainFeature" Title="SoftwareMatcher" Level="1">
+      <ComponentGroupRef Id="AppComponentGroup" />
+      <ComponentRef Id="ServiceComponent" />
+      <ComponentRef Id="LogDirComponent" />
+    </Feature>
+
+    <DirectoryRef Id="LOG_DIR">
+      <Component Id="LogDirComponent" Guid="*">
+        <CreateFolder />
+      </Component>
+    </DirectoryRef>
+
+    <!-- Servicio Windows: corre WinSW que a su vez corre app\\MatcherApi.exe -->
+    <DirectoryRef Id="SERVICEDIR">
+      <Component Id="ServiceComponent" Guid="*">
+        <File Id="WinSWExe" Source="..\dist\payload\service\MarCaribeSoftwareMatcher.exe" KeyPath="yes" />
+        <File Id="WinSWXml" Source="..\dist\payload\service\MarCaribeSoftwareMatcher.xml" />
+
+        <ServiceInstall
+          Id="MarCaribeSoftwareMatcherService"
+          Name="MarCaribeSoftwareMatcher"
+          DisplayName="MarCaribe SoftwareMatcher (SourceAFIS)"
+          Description="API local SourceAFIS para biometría"
+          Start="auto"
+          Type="ownProcess"
+          ErrorControl="normal"
+          Vital="yes"
+          Account="LocalSystem"
+          />
+
+        <ServiceControl
+          Id="StartService"
+          Name="MarCaribeSoftwareMatcher"
+          Stop="both"
+          Remove="uninstall"
+          Wait="yes" />
+      </Component>
+    </DirectoryRef>
+
+  </Product>
+</Wix>
